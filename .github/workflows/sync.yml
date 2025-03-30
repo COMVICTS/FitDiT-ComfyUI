@@ -1,0 +1,32 @@
+name: Sync Upstream Repository
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at UTC 0:00
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+      
+      - name: Add upstream repository
+        run: |
+          git remote add upstream https://github.com/BoyuanJiang/FitDiT.git
+          
+      - name: Sync branch
+        run: |
+          git fetch upstream
+          git checkout main
+          git merge upstream/FitDiT-ComfyUI --allow-unrelated-histories
+          git push https://x-access-token:${{ secrets.MY_PAT }}@github.com/BoyuanJiang/FitDiT-ComfyUI.git main

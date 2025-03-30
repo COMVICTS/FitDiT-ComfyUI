@@ -1,0 +1,466 @@
+{
+  "last_node_id": 16,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        -486.33416748046875,
+        540.9697265625
+      ],
+      "size": [
+        296.26910400390625,
+        246
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "outputs": [],
+      "title": "Masked Image",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "PreviewImage",
+      "pos": [
+        -120.2568588256836,
+        537.1773681640625
+      ],
+      "size": [
+        296.26910400390625,
+        246
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        }
+      ],
+      "outputs": [],
+      "title": "Mask",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "PreviewImage",
+      "pos": [
+        -485.3392028808594,
+        897.086181640625
+      ],
+      "size": [
+        296.26910400390625,
+        246
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [],
+      "title": "Pose Image",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "PreviewImage",
+      "pos": [
+        382.5246276855469,
+        526.397705078125
+      ],
+      "size": [
+        296.26910400390625,
+        246
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11
+        }
+      ],
+      "outputs": [],
+      "title": "Try-on Result",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 6,
+      "type": "LoadImage",
+      "pos": [
+        -922.4596557617188,
+        421.64849853515625
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2,
+            9
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Load Model Image",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1.jpeg",
+        "image"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "FitDiTLoader",
+      "pos": [
+        -920.2726440429688,
+        191.14793395996094
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "FITDIT_MODEL",
+          "links": [
+            12,
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FitDiTLoader"
+      },
+      "widgets_values": [
+        "cuda",
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "pos": [
+        -920.228759765625,
+        788.4578247070312
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Load Garment Image",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1 (1).jpeg",
+        "image"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "FitDiTMaskGenerator",
+      "pos": [
+        -375.2276306152344,
+        203.31417846679688
+      ],
+      "size": [
+        315,
+        194
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "FITDIT_MODEL",
+          "link": 12
+        },
+        {
+          "name": "vton_image",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "masked_image",
+          "type": "IMAGE",
+          "links": [
+            3
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "IMAGE",
+          "links": [
+            4,
+            7
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "pose_image",
+          "type": "IMAGE",
+          "links": [
+            5,
+            8
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FitDiTMaskGenerator"
+      },
+      "widgets_values": [
+        "Upper-body",
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 4,
+      "type": "FitDiTTryOn",
+      "pos": [
+        370.2103271484375,
+        190.16514587402344
+      ],
+      "size": [
+        315,
+        258
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "FITDIT_MODEL",
+          "link": 13
+        },
+        {
+          "name": "vton_image",
+          "type": "IMAGE",
+          "link": 9
+        },
+        {
+          "name": "garm_image",
+          "type": "IMAGE",
+          "link": 10
+        },
+        {
+          "name": "mask",
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "name": "pose_image",
+          "type": "IMAGE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": "IMAGE",
+          "links": [
+            11
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FitDiTTryOn"
+      },
+      "widgets_values": [
+        20,
+        2,
+        77,
+        "randomize",
+        1,
+        "768x1024"
+      ]
+    }
+  ],
+  "links": [
+    [
+      2,
+      6,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      3,
+      3,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      4,
+      3,
+      1,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      3,
+      2,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      3,
+      1,
+      4,
+      3,
+      "IMAGE"
+    ],
+    [
+      8,
+      3,
+      2,
+      4,
+      4,
+      "IMAGE"
+    ],
+    [
+      9,
+      6,
+      0,
+      4,
+      1,
+      "IMAGE"
+    ],
+    [
+      10,
+      5,
+      0,
+      4,
+      2,
+      "IMAGE"
+    ],
+    [
+      11,
+      4,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      16,
+      0,
+      3,
+      0,
+      "FITDIT_MODEL"
+    ],
+    [
+      13,
+      16,
+      0,
+      4,
+      0,
+      "FITDIT_MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7400249944258216,
+      "offset": [
+        1324.9685785949457,
+        -16.47811243316606
+      ]
+    },
+    "node_versions": {
+      "comfy-core": "unknown"
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,12 @@
+torch
+torchvision
+accelerate
+diffusers>=0.31.0
+transformers>=4.39.3
+numpy
+scikit-image
+huggingface_hub
+onnxruntime
+opencv-python
+matplotlib
+einops
