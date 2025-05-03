@@ -112,14 +112,14 @@ class FitDiTMaskGenerator:
     FUNCTION = "generate_mask"
     CATEGORY = "FitDiT"
 
-    def generate_mask(self, model, vton_image, category, gender, offset_top, offset_bottom, offset_left, offset_right):
-        # Create a cache key including gender and offsets
-        cache_key = f"{gender}_{category}_{offset_top}_{offset_bottom}_{offset_left}_{offset_right}"
+   def generate_mask(self, model, vton_image, category, cache_key, offset_top, offset_bottom, offset_left, offset_right):
+        # Create a cache key including cache_key and offsets
+        cache_key = f"{cache_key}_{category}_{offset_top}_{offset_bottom}_{offset_left}_{offset_right}"
         print(f"Cache Key: {cache_key}")
 
         # Check if we have cached results
         if cache_key in self._mask_cache:
-            print(f"Using cached mask for {gender}, {category} with offsets {offset_top, offset_bottom, offset_left, offset_right}")
+            print(f"Using cached mask for {cache_key}, {category} with offsets {offset_top, offset_bottom, offset_left, offset_right}")
             return self._mask_cache[cache_key]
 
         with torch.inference_mode():
@@ -172,7 +172,7 @@ class FitDiTMaskGenerator:
             # Cache the result (deep copy to prevent mutation issues)
             self._mask_cache[cache_key] = copy.deepcopy(result)
 
-            print(f"Cached mask for {gender}, {category} with offsets {offset_top, offset_bottom, offset_left, offset_right}")
+            print(f"Cached mask for {cache_key}, {category} with offsets {offset_top, offset_bottom, offset_left, offset_right}")
             return result
 
 class FitDiTTryOn:
