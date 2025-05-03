@@ -112,7 +112,7 @@ class FitDiTMaskGenerator:
     FUNCTION = "generate_mask"
     CATEGORY = "FitDiT"
 
-   def generate_mask(self, model, vton_image, category, cache_key, offset_top, offset_bottom, offset_left, offset_right):
+    def generate_mask(self, model, vton_image, category, cache_key, offset_top, offset_bottom, offset_left, offset_right):
         # Create a cache key including cache_key and offsets
         cache_key = f"{cache_key}_{category}_{offset_top}_{offset_bottom}_{offset_left}_{offset_right}"
         print(f"Cache Key: {cache_key}")
