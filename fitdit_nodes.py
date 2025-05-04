@@ -99,7 +99,7 @@ class FitDiTMaskGenerator:
                 "model": ("FITDIT_MODEL",),
                 "vton_image": ("IMAGE",),
                 "category": (["Upper-body", "Lower-body", "Dresses"],),
-                "gender": (["male", "female"],),  # Added gender input
+                "cache_key": ("STRING", {"default": "default"}),
                 "offset_top": ("INT", {"default": 0, "min": -200, "max": 200}),
                 "offset_bottom": ("INT", {"default": 0, "min": -200, "max": 200}),
                 "offset_left": ("INT", {"default": 0, "min": -200, "max": 200}),
